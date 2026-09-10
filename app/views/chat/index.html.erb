@@ -1,0 +1,614 @@
+<style>
+    .ai-cv-page {
+        min-height: 100vh;
+        background: #020617;
+        color: #fff;
+    }
+
+    .ai-cv-page *,
+    .ai-cv-page *::before,
+    .ai-cv-page *::after {
+        box-sizing: border-box;
+    }
+
+    .ai-cv-page .ai-container {
+        width: 100%;
+        max-width: 1152px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    /* HEADER */
+
+    .ai-cv-page .ai-header {
+        border-bottom: 1px solid #1e293b;
+    }
+
+    .ai-cv-page .ai-header-inner {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .ai-cv-page .ai-logo {
+        color: #22d3ee;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+
+    .ai-cv-page .ai-back {
+        color: #64748b;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s ease;
+    }
+
+    .ai-cv-page .ai-back:hover {
+        color: #fff;
+    }
+
+
+    /* HERO */
+
+    .ai-cv-page .ai-hero {
+        padding-top: 80px;
+        padding-bottom: 64px;
+    }
+
+    .ai-cv-page .ai-hero-content {
+        max-width: 800px;
+    }
+
+    .ai-cv-page .ai-eyebrow {
+        margin: 0 0 18px;
+        color: #22d3ee;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.28em;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+
+    .ai-cv-page .ai-hero h1 {
+        margin: 0;
+        color: #fff;
+        font-size: clamp(44px, 7vw, 72px);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+    }
+
+    .ai-cv-page .ai-hero-description {
+        max-width: 720px;
+        margin: 24px 0 0;
+        color: #94a3b8;
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+
+    /* CHAT */
+
+    .ai-cv-page .ai-chat {
+        width: 100%;
+        max-width: 1000px;
+        margin-top: 8px;
+        overflow: hidden;
+        border: 1px solid #1e293b;
+        border-radius: 24px;
+        background: #0f172a;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .ai-cv-page .ai-conversation {
+        padding: 40px;
+    }
+
+    .ai-cv-page .ai-message {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .ai-cv-page .ai-icon {
+        width: 42px;
+        min-width: 42px;
+        height: 42px;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 42px;
+        border: 1px solid rgba(34, 211, 238, 0.3);
+        border-radius: 12px;
+        background: rgba(34, 211, 238, 0.05);
+        color: #22d3ee;
+        font-size: 18px;
+    }
+
+    .ai-cv-page .ai-message-content {
+        min-width: 0;
+        max-width: 760px;
+    }
+
+    .ai-cv-page .ai-label {
+        margin: 0;
+        color: #22d3ee;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        line-height: 1.5;
+        text-transform: uppercase;
+    }
+
+    .ai-cv-page .ai-message-text {
+        margin: 12px 0 0;
+        color: #cbd5e1;
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+
+    /* QUESTIONS */
+
+    .ai-cv-page .ai-suggestions {
+        margin-top: 42px;
+    }
+
+    .ai-cv-page .ai-section-label {
+        margin: 0;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .ai-cv-page .ai-question-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .ai-cv-page .ai-question {
+        width: 100% !important;
+        min-height: 88px;
+        margin: 0 !important;
+        padding: 18px 20px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+
+        border: 1px solid #334155 !important;
+        border-radius: 14px !important;
+        outline: none !important;
+
+        background: #020617 !important;
+        color: #cbd5e1 !important;
+
+        font-family: inherit !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        line-height: 1.5 !important;
+        text-align: left !important;
+
+        cursor: pointer !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+
+        transition:
+                border-color 0.2s ease,
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease !important;
+    }
+
+    .ai-cv-page .ai-question:hover {
+        border-color: rgba(34, 211, 238, 0.55) !important;
+        background: #0b1220 !important;
+        color: #fff !important;
+        transform: translateY(-1px);
+    }
+
+    .ai-cv-page .ai-question-title {
+        display: block;
+        width: 100%;
+        color: inherit;
+    }
+
+    .ai-cv-page .ai-question-description {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+
+    /* INPUT AREA */
+
+    .ai-cv-page .ai-input-area {
+        border-top: 1px solid #1e293b;
+        background: #020617;
+        padding: 24px 40px 28px;
+    }
+
+    .ai-cv-page .ai-form {
+        width: 100%;
+        margin: 0;
+    }
+
+    .ai-cv-page .ai-input-row {
+        display: flex;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .ai-cv-page .ai-input {
+        display: block !important;
+        width: auto !important;
+        min-width: 0 !important;
+        flex: 1 1 auto !important;
+
+        height: 50px !important;
+        margin: 0 !important;
+        padding: 0 18px !important;
+
+        border: 1px solid #334155 !important;
+        border-radius: 12px !important;
+        outline: none !important;
+
+        background: #0f172a !important;
+        color: #fff !important;
+
+        font-family: inherit !important;
+        font-size: 14px !important;
+
+        box-shadow: none !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+    }
+
+    .ai-cv-page .ai-input::placeholder {
+        color: #475569;
+        opacity: 1;
+    }
+
+    .ai-cv-page .ai-input:focus {
+        border-color: #22d3ee !important;
+        box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.08) !important;
+    }
+
+    .ai-cv-page .ai-submit {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: auto !important;
+        min-width: 110px !important;
+        height: 50px !important;
+
+        margin: 0 !important;
+        padding: 0 24px !important;
+
+        border: 0 !important;
+        border-radius: 12px !important;
+        outline: none !important;
+
+        background: #22d3ee !important;
+        color: #020617 !important;
+
+        font-family: inherit !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+
+        cursor: pointer !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+
+        box-shadow: none !important;
+
+        transition:
+                background 0.2s ease,
+                transform 0.2s ease !important;
+    }
+
+    .ai-cv-page .ai-submit:hover {
+        background: #67e8f9 !important;
+        transform: translateY(-1px);
+    }
+
+    .ai-cv-page .ai-disclaimer {
+        margin: 10px 0 0;
+        color: #475569;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+
+    /* FOOTER */
+
+    .ai-cv-page .ai-footer {
+        margin-top: 48px;
+        padding: 24px 0 40px;
+    }
+
+
+    /* TABLET / MOBILE */
+
+    @media (max-width: 700px) {
+
+        .ai-cv-page .ai-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .ai-cv-page .ai-header-inner {
+            min-height: 68px;
+        }
+
+        .ai-cv-page .ai-hero {
+            padding-top: 56px;
+            padding-bottom: 40px;
+        }
+
+        .ai-cv-page .ai-hero h1 {
+            font-size: 44px;
+        }
+
+        .ai-cv-page .ai-hero-description {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .ai-cv-page .ai-chat {
+            border-radius: 18px;
+        }
+
+        .ai-cv-page .ai-conversation {
+            padding: 24px;
+        }
+
+        .ai-cv-page .ai-message {
+            gap: 12px;
+        }
+
+        .ai-cv-page .ai-icon {
+            width: 38px;
+            min-width: 38px;
+            height: 38px;
+            min-height: 38px;
+            flex-basis: 38px;
+        }
+
+        .ai-cv-page .ai-message-text {
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        .ai-cv-page .ai-question-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .ai-cv-page .ai-input-area {
+            padding: 20px 24px 24px;
+        }
+
+        .ai-cv-page .ai-input-row {
+            flex-direction: column;
+        }
+
+        .ai-cv-page .ai-input {
+            width: 100% !important;
+        }
+
+        .ai-cv-page .ai-submit {
+            width: 100% !important;
+        }
+    }
+</style>
+
+
+<div class="ai-cv-page">
+
+  <!-- HEADER -->
+  <header class="ai-header">
+    <div class="ai-container ai-header-inner">
+
+      <a href="/" class="ai-logo">
+        AI Professional CV
+      </a>
+
+      <a href="/" class="ai-back">
+        ← CV
+      </a>
+
+    </div>
+  </header>
+
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <section class="ai-container ai-hero">
+
+      <div class="ai-hero-content">
+
+        <p class="ai-eyebrow">
+          AI CV Assistant
+        </p>
+
+        <h1>
+          Pregúntale a mi CV
+        </h1>
+
+        <p class="ai-hero-description">
+          Haz preguntas sobre mi experiencia profesional, conocimientos
+          técnicos, liderazgo, gestión de proyectos y trayectoria.
+        </p>
+
+      </div>
+
+
+      <!-- CHAT -->
+      <div class="ai-chat">
+
+        <!-- CONVERSATION -->
+        <div class="ai-conversation">
+
+          <!-- ASSISTANT -->
+          <div class="ai-message">
+
+            <div class="ai-icon">
+              ✦
+            </div>
+
+            <div class="ai-message-content">
+
+              <p class="ai-label">
+                Asistente del CV
+              </p>
+
+              <p class="ai-message-text">
+                Hola. Puedo responder preguntas sobre la experiencia
+                profesional de Arantzazu, su trayectoria como Senior Ruby
+                on Rails Engineer, Technical Lead y PMO, así como sobre
+                sus conocimientos técnicos, formación y certificaciones.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- QUESTIONS -->
+          <div class="ai-suggestions">
+
+            <p class="ai-section-label">
+              Puedes preguntarme
+            </p>
+
+            <div class="ai-question-grid">
+
+              <button
+                type="button"
+                class="ai-question"
+              >
+                <span class="ai-question-title">
+                  ¿Cuál es su experiencia con Ruby on Rails?
+                </span>
+
+                <span class="ai-question-description">
+                  Experiencia técnica y trayectoria profesional
+                </span>
+              </button>
+
+
+              <button
+                type="button"
+                class="ai-question"
+              >
+                <span class="ai-question-title">
+                  ¿Qué experiencia tiene como Technical Lead?
+                </span>
+
+                <span class="ai-question-description">
+                  Liderazgo técnico y equipos
+                </span>
+              </button>
+
+
+              <button
+                type="button"
+                class="ai-question"
+              >
+                <span class="ai-question-title">
+                  ¿Qué experiencia tiene como PMO?
+                </span>
+
+                <span class="ai-question-description">
+                  Gestión, coordinación y proyectos
+                </span>
+              </button>
+
+
+              <button
+                type="button"
+                class="ai-question"
+              >
+                <span class="ai-question-title">
+                  ¿Ha trabajado en el sector financiero?
+                </span>
+
+                <span class="ai-question-description">
+                  Sectores y experiencia empresarial
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INPUT -->
+        <div class="ai-input-area">
+
+          <form class="ai-form">
+
+            <div class="ai-input-row">
+
+              <input
+                type="text"
+                class="ai-input"
+                placeholder="Pregunta algo sobre mi perfil..."
+              >
+
+              <button
+                type="submit"
+                class="ai-submit"
+              >
+                Enviar →
+              </button>
+
+            </div>
+
+            <p class="ai-disclaimer">
+              Las respuestas estarán basadas en la información profesional
+              disponible en este CV.
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+      <div class="ai-footer">
+
+        <a href="/" class="ai-back">
+          ← Volver al CV
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
