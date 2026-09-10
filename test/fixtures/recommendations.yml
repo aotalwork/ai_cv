@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile: one
+  author: MyString
+  author_role: MyString
+  company: MyString
+  date: 2026-09-10
+  summary: MyText
+  content: MyText
+
+two:
+  profile: two
+  author: MyString
+  author_role: MyString
+  company: MyString
+  date: 2026-09-10
+  summary: MyText
+  content: MyText
