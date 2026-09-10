@@ -8,193 +8,228 @@ export default class extends Controller {
         "suggestion"
     ]
 
-    connect() {
-        this.scrollToBottom()
+
+connect() {
+    this.endpoint = this.element.dataset.endpoint || "/chat/ask"
+    this.isLoading = false
+}
+
+async submit(event) {
+    event.preventDefault()
+
+    if (this.isLoading) return
+
+    const question = this.inputTarget.value.trim()
+
+    if (!question) {
+        this.inputTarget.focus()
+        return
     }
 
-    submit(event) {
-        event.preventDefault()
+    await this.ask(question)
+}
 
-        console.log("SUBMIT DETECTADO")
+async useSuggestion(event) {
+    event.preventDefault()
 
-        const question = this.inputTarget.value.trim()
+    if (this.isLoading) return
 
-        console.log("PREGUNTA:", question)
+    const question = event.currentTarget.dataset.question
 
-        if (!question) return
+    if (!question) return
 
-        this.sendQuestion(question)
+    this.inputTarget.value = question
+
+    await this.ask(question)
+}
+
+async ask(question) {
+    if (this.isLoading) return
+
+    this.setLoading(true)
+
+    this.appendUserMessage(question)
+
+    this.inputTarget.value = ""
+
+    const loadingMessage = this.appendLoadingMessage()
+
+    try {
+        const answer = await this.fetchAnswer(question)
+
+        loadingMessage.remove()
+
+        this.appendAssistantMessage(answer)
+    } catch (error) {
+        console.error("CV Chat error:", error)
+
+        loadingMessage.remove()
+
+        this.appendAssistantMessage(
+            "Lo siento, no he podido procesar la pregunta en este momento. " +
+            "Por favor, inténtalo de nuevo."
+        )
+    } finally {
+        this.setLoading(false)
+        this.inputTarget.focus()
     }
+}
 
-    useSuggestion(event) {
-        const question = event.currentTarget.dataset.question
+async fetchAnswer(question) {
+    const response = await fetch(this.endpoint, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-CSRF-Token": this.csrfToken
+        },
+        body: JSON.stringify({
+            question: question
+        })
+    })
 
-        if (!question) return
-
-        this.inputTarget.value = question
-        this.sendQuestion(question)
-    }
-
-    async sendQuestion(question) {
-        this.inputTarget.value = ""
-        this.setLoading(true)
-
-        this.appendUserMessage(question)
-        this.appendLoadingMessage()
+    if (!response.ok) {
+        let errorMessage = `HTTP ${response.status}`
 
         try {
-            const response = await fetch("/chat/ask", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-CSRF-Token": this.csrfToken()
-                },
-                body: JSON.stringify({
-                    question: question
-                })
-            })
-
             const data = await response.json()
 
-            this.removeLoadingMessage()
-
-            if (!response.ok) {
-                throw new Error(data.error || "Ha ocurrido un error.")
+            if (data.error) {
+                errorMessage = data.error
             }
-
-            this.appendAssistantMessage(data.answer)
-        } catch (error) {
-            this.removeLoadingMessage()
-
-            this.appendAssistantMessage(
-                "Lo siento, no he podido procesar la pregunta. Inténtalo de nuevo."
-            )
-
-            console.error(error)
-        } finally {
-            this.setLoading(false)
-        }
-    }
-
-    appendUserMessage(question) {
-        const message = document.createElement("div")
-
-        message.className = "ai-message ai-user-message"
-
-        message.innerHTML = `
-      <div class="ai-icon ai-user-icon">
-        →
-      </div>
-
-      <div class="ai-message-content">
-        <p class="ai-label ai-user-label">
-          Tú
-        </p>
-
-        <p class="ai-message-text">
-          ${this.escapeHtml(question)}
-        </p>
-      </div>
-    `
-
-        this.messagesTarget.appendChild(message)
-
-        this.scrollToBottom()
-    }
-
-    appendAssistantMessage(answer) {
-        const message = document.createElement("div")
-
-        message.className = "ai-message ai-assistant-message"
-
-        message.innerHTML = `
-      <div class="ai-icon">
-        ✦
-      </div>
-
-      <div class="ai-message-content">
-        <p class="ai-label">
-          Asistente del CV
-        </p>
-
-        <div class="ai-message-text">
-          ${this.formatAnswer(answer)}
-        </div>
-      </div>
-    `
-
-        this.messagesTarget.appendChild(message)
-
-        this.scrollToBottom()
-    }
-
-    appendLoadingMessage() {
-        const message = document.createElement("div")
-
-        message.id = "ai-loading-message"
-        message.className = "ai-message"
-
-        message.innerHTML = `
-      <div class="ai-icon">
-        ✦
-      </div>
-
-      <div class="ai-message-content">
-        <p class="ai-label">
-          Asistente del CV
-        </p>
-
-        <p class="ai-message-text ai-loading">
-          Pensando...
-        </p>
-      </div>
-    `
-
-        this.messagesTarget.appendChild(message)
-
-        this.scrollToBottom()
-    }
-
-    removeLoadingMessage() {
-        document.getElementById("ai-loading-message")?.remove()
-    }
-
-    setLoading(loading) {
-        this.submitTarget.disabled = loading
-
-        if (loading) {
-            this.submitTarget.textContent = "Enviando..."
-        } else {
-            this.submitTarget.textContent = "Enviar →"
+        } catch {
+            // La respuesta no era JSON.
         }
 
-        this.suggestionTargets.forEach((button) => {
-            button.disabled = loading
+        throw new Error(errorMessage)
+    }
+
+    const data = await response.json()
+
+    if (!data.answer) {
+        throw new Error("The server did not return an answer")
+    }
+
+    return data.answer
+}
+
+appendUserMessage(question) {
+    const message = document.createElement("div")
+
+    message.className = "ai-message ai-user-message"
+
+    message.innerHTML = `
+<div class="ai-icon ai-user-icon">
+            ●
+</div>
+
+<div class="ai-message-content">
+    <p class="ai-label ai-user-label">
+        Tú
+    </p>
+
+    <p class="ai-message-text"></p>
+</div>
+    `
+
+    message.querySelector(".ai-message-text").textContent = question
+
+    this.messagesTarget.appendChild(message)
+
+    this.scrollToBottom()
+}
+
+appendAssistantMessage(answer) {
+    const message = document.createElement("div")
+
+    message.className = "ai-message"
+
+    message.innerHTML = `
+<div class="ai-icon">
+            ✦
+</div>
+
+<div class="ai-message-content">
+    <p class="ai-label">
+        Asistente del CV
+    </p>
+
+    <p class="ai-message-text"></p>
+</div>
+    `
+
+    message.querySelector(".ai-message-text").textContent = answer
+
+    this.messagesTarget.appendChild(message)
+
+    this.scrollToBottom()
+}
+
+appendLoadingMessage() {
+    const message = document.createElement("div")
+
+    message.className = "ai-message ai-loading-message"
+
+    message.innerHTML = `
+<div class="ai-icon">
+            ✦
+</div>
+
+<div class="ai-message-content">
+    <p class="ai-label">
+        Asistente del CV
+    </p>
+
+    <p class="ai-message-text ai-loading">
+        Pensando...
+    </p>
+</div>
+    `
+
+    this.messagesTarget.appendChild(message)
+
+    this.scrollToBottom()
+
+    return message
+}
+
+setLoading(value) {
+    this.isLoading = value
+
+    this.submitTarget.disabled = value
+    this.inputTarget.disabled = value
+
+    this.suggestionTargets.forEach((suggestion) => {
+        suggestion.disabled = value
+    })
+
+    this.submitTarget.textContent = value
+        ? "Enviando..."
+        : "Enviar →"
+}
+
+scrollToBottom() {
+    requestAnimationFrame(() => {
+        const conversation = this.element.querySelector(
+            ".ai-conversation"
+        )
+
+        if (!conversation) return
+
+        conversation.scrollTo({
+            top: conversation.scrollHeight,
+            behavior: "smooth"
         })
-    }
+    })
+}
 
-    csrfToken() {
-        return document
-            .querySelector('meta[name="csrf-token"]')
-            ?.getAttribute("content")
-    }
+get csrfToken() {
+    const meta = document.querySelector(
+        'meta[name="csrf-token"]'
+    )
 
-    scrollToBottom() {
-        requestAnimationFrame(() => {
-            this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
-        })
-    }
+    return meta ? meta.content : ""
+}
 
-    formatAnswer(answer) {
-        return this.escapeHtml(answer)
-            .replace(/\n\n/g, "<br><br>")
-            .replace(/\n/g, "<br>")
-    }
 
-    escapeHtml(value) {
-        const div = document.createElement("div")
-        div.textContent = value
-        return div.innerHTML
-    }
 }

@@ -25,5 +25,14 @@ class ChatController < ApplicationController
       question: question,
       answer: answer
     }
+
+  rescue StandardError => e
+    Rails.logger.error(
+      "AiCv::AnswerQuestion error: #{e.class}: #{e.message}"
+    )
+
+    render json: {
+      error: "No he podido procesar la pregunta. Inténtalo de nuevo."
+    }, status: :internal_server_error
   end
 end
