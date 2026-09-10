@@ -52,7 +52,6 @@
         color: #fff;
     }
 
-
     /* HERO */
 
     .ai-cv-page .ai-hero {
@@ -91,7 +90,6 @@
         line-height: 1.8;
     }
 
-
     /* CHAT */
 
     .ai-cv-page .ai-chat {
@@ -107,6 +105,12 @@
 
     .ai-cv-page .ai-conversation {
         padding: 40px;
+    }
+
+    .ai-cv-page .ai-messages {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
     }
 
     .ai-cv-page .ai-message {
@@ -153,6 +157,31 @@
         line-height: 1.9;
     }
 
+    /* USER MESSAGE */
+
+    .ai-cv-page .ai-user-message {
+        flex-direction: row-reverse;
+    }
+
+    .ai-cv-page .ai-user-message .ai-message-content {
+        text-align: right;
+    }
+
+    .ai-cv-page .ai-user-icon {
+        border-color: #334155;
+        background: #020617;
+        color: #94a3b8;
+    }
+
+    .ai-cv-page .ai-user-label {
+        color: #94a3b8;
+    }
+
+    /* LOADING */
+
+    .ai-cv-page .ai-loading {
+        color: #64748b;
+    }
 
     /* QUESTIONS */
 
@@ -205,10 +234,10 @@
         -webkit-appearance: none !important;
 
         transition:
-                border-color 0.2s ease,
-                background 0.2s ease,
-                color 0.2s ease,
-                transform 0.2s ease !important;
+          border-color 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease !important;
     }
 
     .ai-cv-page .ai-question:hover {
@@ -232,7 +261,6 @@
         font-size: 12px;
         font-weight: 400;
     }
-
 
     /* INPUT AREA */
 
@@ -320,13 +348,20 @@
         box-shadow: none !important;
 
         transition:
-                background 0.2s ease,
-                transform 0.2s ease !important;
+          background 0.2s ease,
+          transform 0.2s ease !important;
     }
 
     .ai-cv-page .ai-submit:hover {
         background: #67e8f9 !important;
         transform: translateY(-1px);
+    }
+
+    .ai-cv-page .ai-submit:disabled,
+    .ai-cv-page .ai-question:disabled {
+        opacity: 0.5;
+        cursor: not-allowed !important;
+        transform: none !important;
     }
 
     .ai-cv-page .ai-disclaimer {
@@ -336,14 +371,12 @@
         line-height: 1.5;
     }
 
-
     /* FOOTER */
 
     .ai-cv-page .ai-footer {
         margin-top: 48px;
         padding: 24px 0 40px;
     }
-
 
     /* TABLET / MOBILE */
 
@@ -419,12 +452,16 @@
     }
 </style>
 
-
-<div class="ai-cv-page">
+<div
+    class="ai-cv-page"
+    data-controller="chat"
+>
 
   <!-- HEADER -->
+
   <header class="ai-header">
     <div class="ai-container ai-header-inner">
+
 
       <a href="/" class="ai-logo">
         AI Professional CV
@@ -435,11 +472,14 @@
       </a>
 
     </div>
+
+
   </header>
 
-
   <!-- MAIN -->
+
   <main>
+
 
     <!-- HERO -->
     <section class="ai-container ai-hero">
@@ -468,25 +508,32 @@
         <!-- CONVERSATION -->
         <div class="ai-conversation">
 
-          <!-- ASSISTANT -->
-          <div class="ai-message">
+          <div
+              class="ai-messages"
+              data-chat-target="messages"
+          >
 
-            <div class="ai-icon">
-              ✦
-            </div>
+            <!-- ASSISTANT -->
+            <div class="ai-message">
 
-            <div class="ai-message-content">
+              <div class="ai-icon">
+                ✦
+              </div>
 
-              <p class="ai-label">
-                Asistente del CV
-              </p>
+              <div class="ai-message-content">
 
-              <p class="ai-message-text">
-                Hola. Puedo responder preguntas sobre la experiencia
-                profesional de Arantzazu, su trayectoria como Senior Ruby
-                on Rails Engineer, Technical Lead y PMO, así como sobre
-                sus conocimientos técnicos, formación y certificaciones.
-              </p>
+                <p class="ai-label">
+                  Asistente del CV
+                </p>
+
+                <p class="ai-message-text">
+                  Hola. Puedo responder preguntas sobre la experiencia
+                  profesional de Arantzazu, su trayectoria como Senior Ruby
+                  on Rails Engineer, Technical Lead y PMO, así como sobre
+                  sus conocimientos técnicos, formación y certificaciones.
+                </p>
+
+              </div>
 
             </div>
 
@@ -503,58 +550,70 @@
             <div class="ai-question-grid">
 
               <button
-                type="button"
-                class="ai-question"
+                  type="button"
+                  class="ai-question"
+                  data-chat-target="suggestion"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Cuál es su experiencia con Ruby on Rails?"
               >
-                <span class="ai-question-title">
-                  ¿Cuál es su experiencia con Ruby on Rails?
-                </span>
+            <span class="ai-question-title">
+              ¿Cuál es su experiencia con Ruby on Rails?
+            </span>
 
                 <span class="ai-question-description">
-                  Experiencia técnica y trayectoria profesional
-                </span>
+              Experiencia técnica y trayectoria profesional
+            </span>
               </button>
 
 
               <button
-                type="button"
-                class="ai-question"
+                  type="button"
+                  class="ai-question"
+                  data-chat-target="suggestion"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué experiencia tiene como Technical Lead?"
               >
-                <span class="ai-question-title">
-                  ¿Qué experiencia tiene como Technical Lead?
-                </span>
+            <span class="ai-question-title">
+              ¿Qué experiencia tiene como Technical Lead?
+            </span>
 
                 <span class="ai-question-description">
-                  Liderazgo técnico y equipos
-                </span>
+              Liderazgo técnico y equipos
+            </span>
               </button>
 
 
               <button
-                type="button"
-                class="ai-question"
+                  type="button"
+                  class="ai-question"
+                  data-chat-target="suggestion"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué experiencia tiene como PMO?"
               >
-                <span class="ai-question-title">
-                  ¿Qué experiencia tiene como PMO?
-                </span>
+            <span class="ai-question-title">
+              ¿Qué experiencia tiene como PMO?
+            </span>
 
                 <span class="ai-question-description">
-                  Gestión, coordinación y proyectos
-                </span>
+              Gestión, coordinación y proyectos
+            </span>
               </button>
 
 
               <button
-                type="button"
-                class="ai-question"
+                  type="button"
+                  class="ai-question"
+                  data-chat-target="suggestion"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Ha trabajado en el sector financiero?"
               >
-                <span class="ai-question-title">
-                  ¿Ha trabajado en el sector financiero?
-                </span>
+            <span class="ai-question-title">
+              ¿Ha trabajado en el sector financiero?
+            </span>
 
                 <span class="ai-question-description">
-                  Sectores y experiencia empresarial
-                </span>
+              Sectores y experiencia empresarial
+            </span>
               </button>
 
             </div>
@@ -567,19 +626,25 @@
         <!-- INPUT -->
         <div class="ai-input-area">
 
-          <form class="ai-form">
+          <form
+              class="ai-form"
+              data-action="submit->chat#submit"
+          >
 
             <div class="ai-input-row">
 
               <input
-                type="text"
-                class="ai-input"
-                placeholder="Pregunta algo sobre mi perfil..."
+                  type="text"
+                  class="ai-input"
+                  placeholder="Pregunta algo sobre mi perfil..."
+                  autocomplete="off"
+                  data-chat-target="input"
               >
 
               <button
-                type="submit"
-                class="ai-submit"
+                  type="submit"
+                  class="ai-submit"
+                  data-chat-target="submit"
               >
                 Enviar →
               </button>
@@ -608,6 +673,7 @@
       </div>
 
     </section>
+
 
   </main>
 
