@@ -1,3 +1,4 @@
+
 <div class="min-h-screen bg-slate-950 text-white">
 
   <!-- HERO -->
@@ -21,12 +22,10 @@
       </p>
 
       <div class="mt-10 flex flex-wrap gap-4">
-        <a
-          href="#ask-cv"
-          class="rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
-        >
-          Pregúntale a mi CV →
-        </a>
+
+        <%= link_to "Pregúntale a mi CV →",
+                    chat_path,
+                    class: "rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300" %>
 
         <% if @profile.linkedin_url.present? %>
           <a
@@ -49,6 +48,7 @@
             GitHub
           </a>
         <% end %>
+
       </div>
 
     </div>
@@ -74,6 +74,7 @@
            ].each_with_index do |role, index| %>
 
           <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
             <div class="text-sm text-slate-500">
               0<%= index + 1 %>
             </div>
@@ -81,6 +82,7 @@
             <div class="mt-4 font-semibold">
               <%= role %>
             </div>
+
           </div>
 
         <% end %>
@@ -110,6 +112,7 @@
           <div class="flex flex-col justify-between gap-4 md:flex-row">
 
             <div>
+
               <h3 class="text-2xl font-bold">
                 <%= experience.position %>
               </h3>
@@ -123,6 +126,7 @@
                   Client: <%= experience.client %>
                 </p>
               <% end %>
+
             </div>
 
             <div class="text-sm text-slate-500 md:text-right">
@@ -138,13 +142,19 @@
           </p>
 
           <% if experience.technologies.present? %>
+
             <div class="mt-6 flex flex-wrap gap-2">
+
               <% experience.technologies.split(",").each do |technology| %>
+
                 <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
                   <%= technology.strip %>
                 </span>
+
               <% end %>
+
             </div>
+
           <% end %>
 
         </article>
@@ -152,11 +162,13 @@
       <% end %>
 
     </div>
+
   </section>
 
 
   <!-- SKILLS -->
   <section class="bg-slate-900/50">
+
     <div class="mx-auto max-w-6xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
@@ -172,23 +184,31 @@
         <% @skills.group_by(&:category).each do |category, skills| %>
 
           <div>
+
             <h3 class="text-xl font-semibold">
               <%= category %>
             </h3>
 
             <div class="mt-5 flex flex-wrap gap-2">
+
               <% skills.each do |skill| %>
+
                 <span class="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-300">
                   <%= skill.name %>
                 </span>
+
               <% end %>
+
             </div>
+
           </div>
 
         <% end %>
 
       </div>
+
     </div>
+
   </section>
 
 
@@ -216,9 +236,11 @@
             </span>
 
             <% if certification.year.present? %>
+
               <span class="text-sm text-slate-500">
                 <%= certification.year %>
               </span>
+
             <% end %>
 
           </div>
@@ -228,11 +250,13 @@
       <% end %>
 
     </div>
+
   </section>
 
 
   <!-- EDUCATION -->
   <section class="bg-slate-900/50">
+
     <div class="mx-auto max-w-6xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
@@ -264,7 +288,9 @@
         <% end %>
 
       </div>
+
     </div>
+
   </section>
 
 
@@ -280,6 +306,7 @@
       <% @languages.each do |language| %>
 
         <div class="rounded-xl border border-slate-800 bg-slate-900 px-5 py-3">
+
           <span class="font-medium">
             <%= language.name %>
           </span>
@@ -287,16 +314,19 @@
           <span class="ml-2 text-sm text-slate-500">
             <%= language.level %>
           </span>
+
         </div>
 
       <% end %>
 
     </div>
+
   </section>
 
 
   <!-- RECOMMENDATION -->
   <section class="bg-slate-900/50">
+
     <div class="mx-auto max-w-4xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
@@ -312,6 +342,7 @@
           </p>
 
           <footer class="mt-6">
+
             <div class="font-semibold">
               <%= recommendation.author %>
             </div>
@@ -320,6 +351,7 @@
               <%= recommendation.author_role %> ·
               <%= recommendation.company %>
             </div>
+
           </footer>
 
         </blockquote>
@@ -327,11 +359,13 @@
       <% end %>
 
     </div>
+
   </section>
 
 
   <!-- AI CTA -->
-  <section id="ask-cv" class="mx-auto max-w-6xl px-6 py-24">
+
+  <section class="mx-auto max-w-6xl px-6 py-24">
 
     <div class="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-10 text-center lg:p-16">
 
@@ -343,26 +377,28 @@
         ¿Quieres saber más sobre mi perfil?
       </h2>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
         Pregunta directamente a mi CV sobre mi experiencia,
         liderazgo, Ruby on Rails, proyectos, gestión o encaje
         con una posición.
       </p>
 
-      <button
-        type="button"
-        class="mt-8 rounded-xl bg-cyan-400 px-8 py-4 font-bold text-slate-950 transition hover:bg-cyan-300"
-      >
-        Pregúntale a mi CV →
-      </button>
+      <div class="mt-10">
+        <%= link_to "Pregúntale a mi CV →",
+                    chat_path,
+                    class: "inline-flex items-center rounded-xl bg-cyan-400 px-8 py-4 font-bold text-slate-950 transition hover:bg-cyan-300" %>
+      </div>
 
     </div>
 
   </section>
 
 
+
+
   <!-- FOOTER -->
   <footer class="border-t border-slate-800">
+
     <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-500 md:flex-row md:justify-between">
 
       <span>
@@ -378,6 +414,8 @@
       </span>
 
     </div>
+
   </footer>
 
 </div>
+
