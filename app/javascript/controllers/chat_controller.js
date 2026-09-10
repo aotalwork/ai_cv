@@ -1,235 +1,124 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = [
-        "messages",
-        "input",
-        "submit",
-        "suggestion"
-    ]
+    static targets = ["messages", "input", "submit", "suggestion"]
 
-
-connect() {
-    this.endpoint = this.element.dataset.endpoint || "/chat/ask"
-    this.isLoading = false
-}
-
-async submit(event) {
-    event.preventDefault()
-
-    if (this.isLoading) return
-
-    const question = this.inputTarget.value.trim()
-
-    if (!question) {
-        this.inputTarget.focus()
-        return
+    connect() {
+        console.log("Chat controller conectado")
+        this.endpoint = "/chat/ask"
+        this.isLoading = false
     }
 
-    await this.ask(question)
-}
+    async submit(event) {
+        event.preventDefault()
 
-async useSuggestion(event) {
-    event.preventDefault()
+        console.log("Submit ejecutado")
 
-    if (this.isLoading) return
+        if (this.isLoading) return
 
-    const question = event.currentTarget.dataset.question
+        const question = this.inputTarget.value.trim()
 
-    if (!question) return
+        if (!question) return
 
-    this.inputTarget.value = question
-
-    await this.ask(question)
-}
-
-async ask(question) {
-    if (this.isLoading) return
-
-    this.setLoading(true)
-
-    this.appendUserMessage(question)
-
-    this.inputTarget.value = ""
-
-    const loadingMessage = this.appendLoadingMessage()
-
-    try {
-        const answer = await this.fetchAnswer(question)
-
-        loadingMessage.remove()
-
-        this.appendAssistantMessage(answer)
-    } catch (error) {
-        console.error("CV Chat error:", error)
-
-        loadingMessage.remove()
-
-        this.appendAssistantMessage(
-            "Lo siento, no he podido procesar la pregunta en este momento. " +
-            "Por favor, inténtalo de nuevo."
-        )
-    } finally {
-        this.setLoading(false)
-        this.inputTarget.focus()
+        await this.ask(question)
     }
-}
 
-async fetchAnswer(question) {
-    const response = await fetch(this.endpoint, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "X-CSRF-Token": this.csrfToken
-        },
-        body: JSON.stringify({
-            question: question
-        })
-    })
+    async ask(question) {
+        console.log("Enviando pregunta:", question)
 
-    if (!response.ok) {
-        let errorMessage = `HTTP ${response.status}`
+        this.setLoading(true)
+
+        this.appendUserMessage(question)
+        this.inputTarget.value = ""
 
         try {
+            const response = await fetch(this.endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-CSRF-Token": this.csrfToken
+                },
+                body: JSON.stringify({
+                    question: question
+                })
+            })
+
+            console.log("HTTP:", response.status)
+
             const data = await response.json()
 
-            if (data.error) {
-                errorMessage = data.error
+            console.log("Respuesta:", data)
+
+            if (!response.ok) {
+                throw new Error(data.error || "Error en el servidor")
             }
-        } catch {
-            // La respuesta no era JSON.
+
+            this.appendAssistantMessage(data.answer)
+        } catch (error) {
+            console.error("Error:", error)
+
+            this.appendAssistantMessage(
+                "No he podido procesar la pregunta. Inténtalo de nuevo."
+            )
+        } finally {
+            this.setLoading(false)
+            this.inputTarget.focus()
         }
-
-        throw new Error(errorMessage)
     }
 
-    const data = await response.json()
+    appendUserMessage(question) {
+        const message = document.createElement("div")
 
-    if (!data.answer) {
-        throw new Error("The server did not return an answer")
+        message.className = "ai-message ai-user-message"
+
+        message.innerHTML = `
+      <div class="ai-icon ai-user-icon">●</div>
+
+      <div class="ai-message-content">
+        <p class="ai-label ai-user-label">Tú</p>
+        <p class="ai-message-text"></p>
+      </div>
+    `
+
+        message.querySelector(".ai-message-text").textContent = question
+
+        this.messagesTarget.appendChild(message)
     }
 
-    return data.answer
-}
+    appendAssistantMessage(answer) {
+        const message = document.createElement("div")
 
-appendUserMessage(question) {
-    const message = document.createElement("div")
+        message.className = "ai-message"
 
-    message.className = "ai-message ai-user-message"
+        message.innerHTML = `
+      <div class="ai-icon">✦</div>
 
-    message.innerHTML = `
-<div class="ai-icon ai-user-icon">
-            ●
-</div>
-
-<div class="ai-message-content">
-    <p class="ai-label ai-user-label">
-        Tú
-    </p>
-
-    <p class="ai-message-text"></p>
-</div>
+      <div class="ai-message-content">
+        <p class="ai-label">Asistente del CV</p>
+        <p class="ai-message-text"></p>
+      </div>
     `
 
-    message.querySelector(".ai-message-text").textContent = question
+        message.querySelector(".ai-message-text").textContent = answer
 
-    this.messagesTarget.appendChild(message)
+        this.messagesTarget.appendChild(message)
+    }
 
-    this.scrollToBottom()
-}
+    setLoading(value) {
+        this.isLoading = value
 
-appendAssistantMessage(answer) {
-    const message = document.createElement("div")
+        this.submitTarget.disabled = value
+        this.inputTarget.disabled = value
 
-    message.className = "ai-message"
+        this.submitTarget.textContent = value
+            ? "Enviando..."
+            : "Enviar →"
+    }
 
-    message.innerHTML = `
-<div class="ai-icon">
-            ✦
-</div>
-
-<div class="ai-message-content">
-    <p class="ai-label">
-        Asistente del CV
-    </p>
-
-    <p class="ai-message-text"></p>
-</div>
-    `
-
-    message.querySelector(".ai-message-text").textContent = answer
-
-    this.messagesTarget.appendChild(message)
-
-    this.scrollToBottom()
-}
-
-appendLoadingMessage() {
-    const message = document.createElement("div")
-
-    message.className = "ai-message ai-loading-message"
-
-    message.innerHTML = `
-<div class="ai-icon">
-            ✦
-</div>
-
-<div class="ai-message-content">
-    <p class="ai-label">
-        Asistente del CV
-    </p>
-
-    <p class="ai-message-text ai-loading">
-        Pensando...
-    </p>
-</div>
-    `
-
-    this.messagesTarget.appendChild(message)
-
-    this.scrollToBottom()
-
-    return message
-}
-
-setLoading(value) {
-    this.isLoading = value
-
-    this.submitTarget.disabled = value
-    this.inputTarget.disabled = value
-
-    this.suggestionTargets.forEach((suggestion) => {
-        suggestion.disabled = value
-    })
-
-    this.submitTarget.textContent = value
-        ? "Enviando..."
-        : "Enviar →"
-}
-
-scrollToBottom() {
-    requestAnimationFrame(() => {
-        const conversation = this.element.querySelector(
-            ".ai-conversation"
-        )
-
-        if (!conversation) return
-
-        conversation.scrollTo({
-            top: conversation.scrollHeight,
-            behavior: "smooth"
-        })
-    })
-}
-
-get csrfToken() {
-    const meta = document.querySelector(
-        'meta[name="csrf-token"]'
-    )
-
-    return meta ? meta.content : ""
-}
-
-
+    get csrfToken() {
+        return document.querySelector(
+            'meta[name="csrf-token"]'
+        )?.content || ""
+    }
 }
