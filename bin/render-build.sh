@@ -5,4 +5,6 @@ bundle install
 
 bin/rails db:prepare
 
+bin/rails tailwindcss:build
+
 bin/rails assets:precompile
