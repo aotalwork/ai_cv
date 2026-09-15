@@ -60,7 +60,7 @@
     }
 
     .ai-cv-page .ai-hero-content {
-        max-width: 800px;
+        max-width: 850px;
     }
 
     .ai-cv-page .ai-eyebrow {
@@ -83,11 +83,19 @@
     }
 
     .ai-cv-page .ai-hero-description {
-        max-width: 720px;
+        max-width: 760px;
         margin: 24px 0 0;
         color: #94a3b8;
         font-size: 18px;
         line-height: 1.8;
+    }
+
+    .ai-cv-page .ai-hero-note {
+        max-width: 760px;
+        margin: 14px 0 0;
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.7;
     }
 
     /* CHAT */
@@ -95,7 +103,7 @@
     .ai-cv-page .ai-chat {
         width: 100%;
         max-width: 1000px;
-        margin-top: 8px;
+        margin-top: 32px;
         overflow: hidden;
         border: 1px solid #1e293b;
         border-radius: 24px;
@@ -379,7 +387,7 @@
         padding: 24px 0 40px;
     }
 
-    /* TABLET / MOBILE */
+    /* MOBILE */
 
     @media (max-width: 700px) {
 
@@ -406,7 +414,12 @@
             line-height: 1.7;
         }
 
+        .ai-cv-page .ai-hero-note {
+            font-size: 13px;
+        }
+
         .ai-cv-page .ai-chat {
+            margin-top: 24px;
             border-radius: 18px;
         }
 
@@ -492,12 +505,18 @@
         </p>
 
         <h1>
-          Pregúntale a mi CV
+          Conóceme más allá del CV
         </h1>
 
         <p class="ai-hero-description">
-          Haz preguntas sobre mi experiencia profesional, conocimientos
-          técnicos, liderazgo, gestión de proyectos y trayectoria.
+          Pregunta sobre mi experiencia, mi forma de trabajar, mis intereses,
+          lo que me apasiona y hacia dónde quiero seguir creciendo.
+        </p>
+
+        <p class="ai-hero-note">
+          Puedes preguntarme tanto por mi trayectoria profesional como por
+          tecnología, inteligencia artificial, hobbies, naturaleza, música,
+          viajes, deporte o mis objetivos personales.
         </p>
 
       </div>
@@ -531,10 +550,15 @@
                 </p>
 
                 <p class="ai-message-text">
-                  Hola. Puedo responder preguntas sobre la experiencia
-                  profesional de Arantzazu, su trayectoria como Senior Ruby
-                  on Rails Engineer, Technical Lead y PMO, así como sobre
-                  sus conocimientos técnicos, formación y certificaciones.
+                  Hola. Soy el asistente del perfil de Arantzazu.
+
+                  Puedo contarte sobre su experiencia como Software Engineer,
+                  Senior Ruby on Rails Engineer, Technical Lead y PMO, pero
+                  también sobre quién es fuera del trabajo: qué le apasiona,
+                  cómo trabaja, qué valores tiene, sus hobbies, sus objetivos
+                  y la vida que le gustaría construir.
+
+                  Pregúntame lo que quieras.
                 </p>
 
               </div>
@@ -549,7 +573,7 @@
           <div class="ai-suggestions">
 
             <p class="ai-section-label">
-              Puedes preguntarme
+              Empieza por aquí
             </p>
 
             <div class="ai-question-grid">
@@ -558,14 +582,30 @@
                   type="button"
                   class="ai-question"
                   data-action="click->chat#useSuggestion"
-                  data-question="¿Cuál es su experiencia con Ruby on Rails?"
+                  data-question="¿Quién es Arantzazu y cómo se describiría?"
               >
                 <span class="ai-question-title">
-                  ¿Cuál es su experiencia con Ruby on Rails?
+                  ¿Quién es Arantzazu?
                 </span>
 
                 <span class="ai-question-description">
-                  Experiencia técnica y trayectoria profesional
+                  Personalidad, trayectoria y forma de ser
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué experiencia tiene con Ruby on Rails?"
+              >
+                <span class="ai-question-title">
+                  ¿Qué experiencia tiene con Ruby on Rails?
+                </span>
+
+                <span class="ai-question-description">
+                  Ingeniería, backend y sistemas críticos
                 </span>
               </button>
 
@@ -581,7 +621,7 @@
                 </span>
 
                 <span class="ai-question-description">
-                  Liderazgo técnico y equipos
+                  Liderazgo técnico, equipos y mentoring
                 </span>
               </button>
 
@@ -590,14 +630,14 @@
                   type="button"
                   class="ai-question"
                   data-action="click->chat#useSuggestion"
-                  data-question="¿Qué experiencia tiene como PMO?"
+                  data-question="¿Qué quiere hacer con la inteligencia artificial?"
               >
                 <span class="ai-question-title">
-                  ¿Qué experiencia tiene como PMO?
+                  ¿Qué quiere hacer con la IA?
                 </span>
 
                 <span class="ai-question-description">
-                  Gestión, coordinación y proyectos
+                  Motivaciones, aprendizaje y futuro profesional
                 </span>
               </button>
 
@@ -606,14 +646,158 @@
                   type="button"
                   class="ai-question"
                   data-action="click->chat#useSuggestion"
-                  data-question="¿Ha trabajado en el sector financiero?"
+                  data-question="¿Cómo es Arantzazu trabajando en equipo?"
               >
                 <span class="ai-question-title">
-                  ¿Ha trabajado en el sector financiero?
+                  ¿Cómo trabaja con otras personas?
                 </span>
 
                 <span class="ai-question-description">
-                  Sectores y experiencia empresarial
+                  Equipo, comunicación, mentoring y valores
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué hace Arantzazu fuera del trabajo?"
+              >
+                <span class="ai-question-title">
+                  ¿Qué hace fuera del trabajo?
+                </span>
+
+                <span class="ai-question-description">
+                  Naturaleza, deporte, hobbies y desconexión
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Quién es Trotsky?"
+              >
+                <span class="ai-question-title">
+                  ¿Quién es Trotsky?
+                </span>
+
+                <span class="ai-question-description">
+                  Su perro y compañero de aventuras
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué música le gusta a Arantzazu?"
+              >
+                <span class="ai-question-title">
+                  ¿Qué música le gusta?
+                </span>
+
+                <span class="ai-question-description">
+                  Rock, reggae, indie y música de los 80 y 90
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué deportes y actividades practica?"
+              >
+                <span class="ai-question-title">
+                  ¿Qué deportes practica?
+                </span>
+
+                <span class="ai-question-description">
+                  Gimnasio, natación, mar y actividades al aire libre
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Cómo imagina Arantzazu su futuro?"
+              >
+                <span class="ai-question-title">
+                  ¿Cómo imagina su futuro?
+                </span>
+
+                <span class="ai-question-description">
+                  Objetivos profesionales y personales
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué hobbies tiene?"
+              >
+                <span class="ai-question-title">
+                  ¿Cuáles son sus hobbies?
+                </span>
+
+                <span class="ai-question-description">
+                  Creatividad, pintura, videojuegos, lectura y más
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué le gusta de vivir en Cádiz?"
+              >
+                <span class="ai-question-title">
+                  ¿Por qué le gusta Cádiz?
+                </span>
+
+                <span class="ai-question-description">
+                  Mar, naturaleza y estilo de vida
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿A dónde le gustaría viajar?"
+              >
+                <span class="ai-question-title">
+                  ¿A dónde le gustaría viajar?
+                </span>
+
+                <span class="ai-question-description">
+                  Viajes, culturas y lugares que quiere descubrir
+                </span>
+              </button>
+
+
+              <button
+                  type="button"
+                  class="ai-question"
+                  data-action="click->chat#useSuggestion"
+                  data-question="¿Qué tipo de proyectos le gustaría crear?"
+              >
+                <span class="ai-question-title">
+                  ¿Qué le gustaría crear?
+                </span>
+
+                <span class="ai-question-description">
+                  IA, software, videojuegos y proyectos personales
                 </span>
               </button>
 
@@ -640,7 +824,7 @@
                   type="text"
                   class="ai-input"
                   name="question"
-                  placeholder="Pregunta algo sobre mi perfil..."
+                  placeholder="Pregúntame lo que quieras..."
                   autocomplete="off"
                   data-chat-target="input"
               >
@@ -650,10 +834,14 @@
                   class="ai-submit"
                   data-chat-target="submit"
               >
-                Enviar →
+                Preguntar →
               </button>
 
             </div>
+
+            <p class="ai-disclaimer">
+              Explora mi perfil profesional y personal a través del asistente.
+            </p>
 
           </form>
 

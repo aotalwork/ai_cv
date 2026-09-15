@@ -17,7 +17,10 @@ class ChatController < ApplicationController
     question = params[:question].to_s.strip
 
     if question.blank?
-      render json: { error: "Escribe una pregunta." }, status: :unprocessable_entity
+      render json: {
+        error: "Escribe una pregunta."
+      }, status: :unprocessable_entity
+
       return
     end
 
@@ -27,7 +30,6 @@ class ChatController < ApplicationController
       question: question,
       answer: answer
     }
-
   rescue StandardError => e
     Rails.logger.error(
       "Chat::AnswerQuestion error: #{e.class}: #{e.message}"

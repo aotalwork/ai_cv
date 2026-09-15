@@ -14,11 +14,12 @@ export default class extends Controller {
         event.preventDefault()
         event.stopPropagation()
 
-        console.log("🔥 SUBMIT INTERCEPTADO")
+        if (this.isLoading) return
 
         const question = this.inputTarget.value.trim()
 
-        if (!question || this.isLoading) {
+        if (!question) {
+            this.inputTarget.focus()
             return
         }
 
@@ -29,14 +30,12 @@ export default class extends Controller {
         console.log("📤 Enviando:", question)
 
         this.setLoading(true)
-
         this.appendUserMessage(question)
 
         this.inputTarget.value = ""
 
         try {
             const body = new URLSearchParams()
-
             body.append("question", question)
 
             const response = await fetch(this.endpoint, {
@@ -60,15 +59,15 @@ export default class extends Controller {
                 )
             }
 
-            this.appendAssistantMessage(data.answer)
-
+            this.appendAssistantMessage(
+                data.answer || "No se ha recibido ninguna respuesta."
+            )
         } catch (error) {
             console.error("❌ Error:", error)
 
             this.appendAssistantMessage(
                 "No he podido procesar la pregunta. Inténtalo de nuevo."
             )
-
         } finally {
             this.setLoading(false)
             this.inputTarget.focus()
@@ -78,11 +77,11 @@ export default class extends Controller {
     useSuggestion(event) {
         event.preventDefault()
 
+        if (this.isLoading) return
+
         const question = event.currentTarget.dataset.question
 
-        if (!question || this.isLoading) {
-            return
-        }
+        if (!question) return
 
         console.log("💡 Pregunta sugerida:", question)
 
@@ -96,22 +95,15 @@ export default class extends Controller {
         message.className = "ai-message ai-user-message"
 
         message.innerHTML = `
-            <div class="ai-icon ai-user-icon">
-                ●
-            </div>
+            <div class="ai-icon ai-user-icon">●</div>
 
             <div class="ai-message-content">
-                <p class="ai-label ai-user-label">
-                    Tú
-                </p>
-
+                <p class="ai-label ai-user-label">Tú</p>
                 <p class="ai-message-text"></p>
             </div>
         `
 
-        message
-            .querySelector(".ai-message-text")
-            .textContent = question
+        message.querySelector(".ai-message-text").textContent = question
 
         this.messagesTarget.appendChild(message)
 
@@ -124,22 +116,16 @@ export default class extends Controller {
         message.className = "ai-message"
 
         message.innerHTML = `
-            <div class="ai-icon">
-                ✦
-            </div>
+            <div class="ai-icon">✦</div>
 
             <div class="ai-message-content">
-                <p class="ai-label">
-                    Asistente del CV
-                </p>
-
+                <p class="ai-label">Asistente del CV</p>
                 <p class="ai-message-text"></p>
             </div>
         `
 
-        message
-            .querySelector(".ai-message-text")
-            .textContent = answer || "No se ha recibido ninguna respuesta."
+        message.querySelector(".ai-message-text").textContent =
+            answer || "No se ha recibido ninguna respuesta."
 
         this.messagesTarget.appendChild(message)
 
@@ -152,9 +138,8 @@ export default class extends Controller {
         this.inputTarget.disabled = value
         this.submitTarget.disabled = value
 
-        this.submitTarget.textContent = value
-            ? "Enviando..."
-            : "Enviar →"
+        this.submitTarget.textContent =
+            value ? "Enviando..." : "Enviar →"
     }
 
     scrollToBottom() {
