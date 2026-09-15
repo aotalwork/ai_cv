@@ -1,12 +1,11 @@
-
 <div class="min-h-screen bg-slate-950 text-white">
 
   <!-- HERO -->
   <section class="mx-auto max-w-6xl px-6 py-20 lg:py-28">
     <div class="max-w-4xl">
 
-      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-        AI Professional CV
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+        CV profesional con IA
       </p>
 
       <h1 class="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
@@ -17,99 +16,157 @@
         <%= @profile.headline %>
       </p>
 
-      <p class="mt-8 max-w-3xl text-lg leading-8 text-slate-400">
+      <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
         <%= @profile.bio %>
+      </p>
+
+      <p class="mt-5 max-w-3xl text-base leading-7 text-slate-500">
+        Me apasiona crear soluciones que resuelvan problemas reales y faciliten
+        el trabajo de las personas. Mi trayectoria ha evolucionado desde el
+        desarrollo de software hasta el liderazgo técnico, el delivery y el PMO,
+        pero la ingeniería y la inquietud técnica siguen siendo una parte
+        fundamental de lo que soy.
       </p>
 
       <div class="mt-10 flex flex-wrap gap-4">
 
-        <%= link_to "Pregúntale a mi CV →",
+        <%= link_to "Pregúntale a mi CV con IA →",
                     chat_path,
                     class: "rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300" %>
 
-        <% if @profile.linkedin_url.present? %>
-          <a
-            href="<%= @profile.linkedin_url %>"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-xl border border-slate-700 px-6 py-3 font-semibold text-white transition hover:border-slate-500"
-          >
-            LinkedIn
-          </a>
-        <% end %>
+        <%= link_to "LinkedIn",
+                    @profile.linkedin_url,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    class: "rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-400" %>
 
-        <% if @profile.github_url.present? %>
-          <a
-            href="<%= @profile.github_url %>"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rounded-xl border border-slate-700 px-6 py-3 font-semibold text-white transition hover:border-slate-500"
-          >
-            GitHub
-          </a>
-        <% end %>
+        <%= link_to "GitHub",
+                    @profile.github_url,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    class: "rounded-xl border border-slate-700 px-6 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-400" %>
 
       </div>
-
     </div>
   </section>
 
 
-  <!-- CAREER EVOLUTION -->
+  <!-- EVOLUCIÓN PROFESIONAL -->
   <section class="border-y border-slate-800 bg-slate-900/50">
     <div class="mx-auto max-w-6xl px-6 py-16">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-        Career evolution
+        Evolución profesional
       </p>
 
-      <div class="mt-10 grid gap-4 md:grid-cols-5">
+      <h2 class="mt-3 text-3xl font-bold">
+        De la ingeniería al liderazgo técnico y la gestión del delivery
+      </h2>
 
-        <% [
-             "Software Engineer",
-             "Ruby on Rails Engineer",
-             "Senior Engineer",
-             "Technical Lead",
-             "PMO"
-           ].each_with_index do |role, index| %>
+      <div class="mt-10 grid gap-6 md:grid-cols-5">
 
-          <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+          <p class="text-sm text-cyan-400">
+            2018–2020
+          </p>
 
-            <div class="text-sm text-slate-500">
-              0<%= index + 1 %>
-            </div>
+          <h3 class="mt-3 text-xl font-bold">
+            Software Developer
+          </h3>
 
-            <div class="mt-4 font-semibold">
-              <%= role %>
-            </div>
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Desarrollo de software, investigación, algoritmos y resolución de
+            problemas técnicos.
+          </p>
+        </div>
 
-          </div>
 
-        <% end %>
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+          <p class="text-sm text-cyan-400">
+            2020
+          </p>
+
+          <h3 class="mt-3 text-xl font-bold">
+            Software Engineer
+          </h3>
+
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Aplicaciones empresariales, Java, Spring Boot, bases de datos
+            relacionales y desarrollo de soluciones.
+          </p>
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+          <p class="text-sm text-cyan-400">
+            2020–2026
+          </p>
+
+          <h3 class="mt-3 text-xl font-bold">
+            Senior Rails Engineer
+          </h3>
+
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Aplicaciones críticas del sector financiero, APIs, rendimiento,
+            bases de datos y sistemas en producción.
+          </p>
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+          <p class="text-sm text-cyan-400">
+            2020–2026
+          </p>
+
+          <h3 class="mt-3 text-xl font-bold">
+            Technical Lead
+          </h3>
+
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Coordinación técnica, mentoring, planificación, revisión de código
+            y toma de decisiones técnicas.
+          </p>
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+          <p class="text-sm text-cyan-400">
+            2026–Actualidad
+          </p>
+
+          <h3 class="mt-3 text-xl font-bold">
+            PMO · Operaciones
+          </h3>
+
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Planificación, gobierno, capacidad, riesgos, dependencias, KPIs y
+            reporting ejecutivo.
+          </p>
+        </div>
 
       </div>
     </div>
   </section>
 
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCIA -->
   <section class="mx-auto max-w-6xl px-6 py-20">
 
     <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-      Experience
+      Experiencia
     </p>
 
-    <h2 class="mt-3 text-4xl font-bold">
-      Professional experience
+    <h2 class="mt-3 text-3xl font-bold">
+      Trayectoria profesional
     </h2>
 
-    <div class="mt-12 space-y-8">
+    <div class="mt-10 space-y-6">
 
       <% @experiences.each do |experience| %>
 
         <article class="rounded-2xl border border-slate-800 bg-slate-900 p-8">
 
-          <div class="flex flex-col justify-between gap-4 md:flex-row">
+          <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
 
             <div>
 
@@ -117,29 +174,36 @@
                 <%= experience.position %>
               </h3>
 
-              <p class="mt-2 text-lg text-cyan-400">
+              <p class="mt-2 text-lg font-medium text-cyan-400">
                 <%= experience.company %>
               </p>
 
               <% if experience.client.present? %>
                 <p class="mt-1 text-sm text-slate-500">
-                  Client: <%= experience.client %>
+                  Cliente: <%= experience.client %>
                 </p>
               <% end %>
 
             </div>
 
-            <div class="text-sm text-slate-500 md:text-right">
-              <%= experience.start_date&.strftime("%m/%Y") %>
-              —
-              <%= experience.end_date&.strftime("%m/%Y") || "Present" %>
-            </div>
+
+            <p class="whitespace-nowrap text-sm text-slate-500">
+              <%= experience.start_date.strftime("%b %Y") %>
+              –
+              <%= experience.end_date.present? ? experience.end_date.strftime("%b %Y") : "Actualidad" %>
+            </p>
 
           </div>
 
-          <p class="mt-6 whitespace-pre-line leading-7 text-slate-400">
-            <%= experience.description %>
-          </p>
+
+          <% if experience.description.present? %>
+
+            <p class="mt-6 whitespace-pre-line leading-7 text-slate-400">
+              <%= experience.description %>
+            </p>
+
+          <% end %>
+
 
           <% if experience.technologies.present? %>
 
@@ -147,7 +211,7 @@
 
               <% experience.technologies.split(",").each do |technology| %>
 
-                <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
+                <span class="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-300">
                   <%= technology.strip %>
                 </span>
 
@@ -162,34 +226,33 @@
       <% end %>
 
     </div>
-
   </section>
 
 
-  <!-- SKILLS -->
+  <!-- HABILIDADES -->
   <section class="bg-slate-900/50">
 
     <div class="mx-auto max-w-6xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-        Skills
+        Habilidades
       </p>
 
-      <h2 class="mt-3 text-4xl font-bold">
-        Technologies & capabilities
+      <h2 class="mt-3 text-3xl font-bold">
+        Capacidades técnicas, liderazgo y gestión
       </h2>
 
-      <div class="mt-12 grid gap-8 md:grid-cols-3">
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
 
         <% @skills.group_by(&:category).each do |category, skills| %>
 
           <div>
 
-            <h3 class="text-xl font-semibold">
+            <h3 class="text-xl font-bold">
               <%= category %>
             </h3>
 
-            <div class="mt-5 flex flex-wrap gap-2">
+            <div class="mt-4 flex flex-wrap gap-2">
 
               <% skills.each do |skill| %>
 
@@ -206,21 +269,19 @@
         <% end %>
 
       </div>
-
     </div>
-
   </section>
 
 
-  <!-- CERTIFICATIONS -->
+  <!-- CERTIFICACIONES -->
   <section class="mx-auto max-w-6xl px-6 py-20">
 
     <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-      Certifications
+      Certificaciones
     </p>
 
-    <h2 class="mt-3 text-4xl font-bold">
-      Continuous learning
+    <h2 class="mt-3 text-3xl font-bold">
+      Aprendizaje continuo
     </h2>
 
     <div class="mt-10 grid gap-4 md:grid-cols-2">
@@ -229,39 +290,30 @@
 
         <div class="rounded-xl border border-slate-800 bg-slate-900 p-5">
 
-          <div class="flex justify-between gap-4">
-
-            <span class="font-medium">
-              <%= certification.name %>
-            </span>
-
-            <% if certification.year.present? %>
-
-              <span class="text-sm text-slate-500">
-                <%= certification.year %>
-              </span>
-
-            <% end %>
-
-          </div>
+          <h3 class="font-semibold text-slate-200">
+            <%= certification.name %>
+          </h3>
 
         </div>
 
       <% end %>
 
     </div>
-
   </section>
 
 
-  <!-- EDUCATION -->
+  <!-- FORMACIÓN -->
   <section class="bg-slate-900/50">
 
     <div class="mx-auto max-w-6xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-        Education
+        Formación
       </p>
+
+      <h2 class="mt-3 text-3xl font-bold">
+        Formación académica
+      </h2>
 
       <div class="mt-10 grid gap-6 md:grid-cols-2">
 
@@ -269,7 +321,7 @@
 
           <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
 
-            <h3 class="text-xl font-semibold">
+            <h3 class="text-xl font-bold">
               <%= education.degree %>
             </h3>
 
@@ -277,80 +329,394 @@
               <%= education.institution %>
             </p>
 
-            <p class="mt-3 text-sm text-slate-500">
-              <%= education.start_year %>
-              —
-              <%= education.end_year || "Present" %>
-            </p>
+            <% if education.start_year.present? %>
+              <p class="mt-2 text-sm text-slate-500">
+                <%= education.start_year %>
+                –
+                <%= education.end_year.present? ? education.end_year : "Actualidad" %>
+              </p>
+            <% end %>
+
+            <% if education.url.present? %>
+              <div class="mt-4">
+                <%= link_to "Ver formación →",
+                            education.url,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            class: "text-sm font-medium text-cyan-400 hover:text-cyan-300" %>
+              </div>
+            <% end %>
 
           </div>
 
         <% end %>
 
       </div>
-
     </div>
-
   </section>
 
 
-  <!-- LANGUAGES -->
+  <!-- IDIOMAS -->
   <section class="mx-auto max-w-6xl px-6 py-20">
 
     <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-      Languages
+      Idiomas
     </p>
+
+    <h2 class="mt-3 text-3xl font-bold">
+      Comunicación internacional
+    </h2>
 
     <div class="mt-8 flex flex-wrap gap-3">
 
       <% @languages.each do |language| %>
 
-        <div class="rounded-xl border border-slate-800 bg-slate-900 px-5 py-3">
+        <span class="rounded-lg border border-slate-700 px-4 py-3 text-sm text-slate-300">
+          <%= language.name %>
 
-          <span class="font-medium">
-            <%= language.name %>
-          </span>
-
-          <span class="ml-2 text-sm text-slate-500">
-            <%= language.level %>
-          </span>
-
-        </div>
+          <% if language.level.present? %>
+            <span class="text-slate-500">
+              · <%= language.level %>
+            </span>
+          <% end %>
+        </span>
 
       <% end %>
 
     </div>
-
   </section>
 
 
-  <!-- RECOMMENDATION -->
+  <!-- MÁS SOBRE MÍ -->
+  <section class="bg-slate-900/50">
+
+    <div class="mx-auto max-w-6xl px-6 py-20">
+
+      <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+        Más sobre mí
+      </p>
+
+      <h2 class="mt-3 text-3xl font-bold">
+        La persona detrás de la tecnología
+      </h2>
+
+      <div class="mt-10 grid gap-8 md:grid-cols-2">
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+          <h3 class="text-xl font-bold">
+            Curiosidad sin demasiados límites
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Siempre he sido una persona curiosa. De pequeña quería ser
+            astronauta y sabía que quería ser ingeniera. Elegí Ingeniería
+            Informática porque era una disciplina con muchas posibilidades,
+            pero también porque me permitía crear, investigar y resolver
+            problemas.
+          </p>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Nunca me ha gustado limitarme a una sola área. Me interesa entender
+            cómo funcionan las cosas y conectar conocimientos diferentes.
+            Si pudiera estudiar otra disciplina, probablemente estaría entre
+            Arqueología y Bellas Artes.
+          </p>
+
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+          <h3 class="text-xl font-bold">
+            Crear cosas que sean útiles
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Una de las cosas que más disfruto de la tecnología es transformar
+            una necesidad en algo que funciona. Me encanta crear soluciones
+            nuevas, pelearme con el código, investigar y finalmente conseguir
+            que todo encaje.
+          </p>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Especialmente cuando el resultado facilita una tarea a otra persona
+            y sabes que realmente le estás haciendo la vida más sencilla.
+            Esa sensación de ver algo que has construido funcionando es una de
+            las partes que más me gustan de la ingeniería.
+          </p>
+
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+          <h3 class="text-xl font-bold">
+            También necesito crear con las manos
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Mi curiosidad no termina en la tecnología. Pinto, me gusta hacer
+            cosas en casa y soy bastante manitas. Me atraen especialmente el
+            diseño 3D, la ebanistería y la alfarería, disciplinas que me
+            encantaría aprender algún día.
+          </p>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            También tengo una idea pendiente: crear mi propio videojuego.
+          </p>
+
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+          <h3 class="text-xl font-bold">
+            Tecnología con propósito
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Mi siguiente gran reto profesional está relacionado con la
+            inteligencia artificial. Quiero profundizar tanto en IA como en
+            desarrollo y crear soluciones que no se limiten a generar
+            respuestas, sino que puedan descubrir información, patrones y
+            resultados interesantes que ayuden a las personas.
+          </p>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Me interesa especialmente la aplicación de la tecnología a
+            problemas reales y complejos, siempre buscando que tenga una
+            utilidad práctica.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- VIDA PERSONAL -->
+  <section class="mx-auto max-w-6xl px-6 py-20">
+
+    <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+      Fuera del trabajo
+    </p>
+
+    <h2 class="mt-3 text-3xl font-bold">
+      Naturaleza, deporte, viajes y pequeñas cosas
+    </h2>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-3">
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+        <h3 class="text-xl font-bold">
+          🌿 Naturaleza
+        </h3>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Soy amante de los animales y de la naturaleza. Vivo en Cádiz porque
+          me encanta poder tener la sierra y el mar cerca.
+        </p>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Uno de mis planes favoritos es salir a pasear por el monte o la playa
+          con mi pareja y Trotsky, mi podenco portugués de un año.
+        </p>
+
+      </div>
+
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+        <h3 class="text-xl font-bold">
+          🌊 Mar y deporte
+        </h3>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Me gusta mantenerme activa. Entreno en el gimnasio y nado porque el
+          deporte me ayuda a desconectar, sentirme sana y despejar la cabeza.
+        </p>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          También disfruto del snorkel, kayak y paddle surf. Tengo pendiente
+          hacer mi bautismo de buceo.
+        </p>
+
+      </div>
+
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+        <h3 class="text-xl font-bold">
+          ✈️ Descubrir
+        </h3>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Me encanta viajar y descubrir lugares nuevos. Creo que conocer otras
+          culturas y formas de vivir enriquece mucho y ayuda a mirar el mundo
+          desde perspectivas diferentes.
+        </p>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Entre los lugares que me gustaría conocer están Kenia y China.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="mt-8 grid gap-8 md:grid-cols-2">
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+        <h3 class="text-xl font-bold">
+          🎵 Mi banda sonora
+        </h3>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Escucho sobre todo rock, reggae e indie, además de mucha música de
+          los 80 y 90. Entre mis favoritos están Pink Floyd, Led Zeppelin, U2,
+          Oasis, Bob Marley, Lana Del Rey y Phil Collins.
+        </p>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Pink Floyd tiene un significado especial para mí porque es música
+          que escuchaba con mi padre cuando era pequeña en el coche.
+        </p>
+
+      </div>
+
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-950 p-8">
+
+        <h3 class="text-xl font-bold">
+          🎬 Cuando desconecto
+        </h3>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          También disfruto de los conciertos, quedar con amigos, tomar algo,
+          hacer karaoke y organizar reuniones de juegos en casa.
+        </p>
+
+        <p class="mt-4 leading-7 text-slate-400">
+          Y cuando necesito desconectar completamente, pocas cosas superan una
+          serie, cocinar algo rico, ropa cómoda y un poco de tiempo para
+          cuidarme.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- MI FORMA DE TRABAJAR -->
+  <section class="bg-slate-900/50">
+
+    <div class="mx-auto max-w-6xl px-6 py-20">
+
+      <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+        Mi forma de trabajar
+      </p>
+
+      <h2 class="mt-3 text-3xl font-bold">
+        Confianza, eficacia y positividad
+      </h2>
+
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+          <h3 class="text-xl font-bold">
+            🤝 Equipo
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Me gusta trabajar en equipo, compartir conocimiento y mentorizar.
+            Valoro especialmente a las personas simpáticas, alegres y
+            comprensivas, capaces de ponerse en el lugar de los demás.
+          </p>
+
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+          <h3 class="text-xl font-bold">
+            🔎 Resolver
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Cuando aparece un problema, primero investigo. Intento comprenderlo,
+            busco documentación, pruebo alternativas y, si no encuentro la
+            respuesta, pregunto y abro el debate.
+          </p>
+
+        </div>
+
+
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-6">
+
+          <h3 class="text-xl font-bold">
+            ✨ Calidad
+          </h3>
+
+          <p class="mt-4 leading-7 text-slate-400">
+            Para mí, hacer un buen trabajo significa entregar algo de calidad,
+            bien probado y sin errores importantes. No se trata únicamente de
+            terminar una tarea, sino de poder confiar en el resultado.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RECOMENDACIÓN -->
   <section class="bg-slate-900/50">
 
     <div class="mx-auto max-w-4xl px-6 py-20">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-        Professional recommendation
+        Recomendación
       </p>
 
       <% @recommendations.each do |recommendation| %>
 
         <blockquote class="mt-8 rounded-2xl border border-slate-800 bg-slate-950 p-8">
 
-          <p class="text-xl leading-8 text-slate-300">
-            “<%= recommendation.summary %>”
-          </p>
+          <% if recommendation.content.present? %>
+
+            <p class="text-xl leading-8 text-slate-300">
+              “<%= recommendation.content %>”
+            </p>
+
+          <% elsif recommendation.summary.present? %>
+
+            <p class="text-xl leading-8 text-slate-300">
+              “<%= recommendation.summary %>”
+            </p>
+
+          <% end %>
+
 
           <footer class="mt-6">
 
-            <div class="font-semibold">
+            <p class="font-semibold text-white">
               <%= recommendation.author %>
-            </div>
+            </p>
 
-            <div class="text-sm text-slate-500">
-              <%= recommendation.author_role %> ·
-              <%= recommendation.company %>
-            </div>
+            <% if recommendation.author_role.present? || recommendation.company.present? %>
+
+              <p class="mt-1 text-sm text-slate-500">
+                <%= [recommendation.author_role, recommendation.company].compact.join(", ") %>
+              </p>
+
+            <% end %>
 
           </footer>
 
@@ -359,34 +725,42 @@
       <% end %>
 
     </div>
-
   </section>
 
 
-  <!-- AI CTA -->
+  <!-- VISIÓN DE FUTURO -->
+  <section class="mx-auto max-w-6xl px-6 py-20">
 
-  <section class="mx-auto max-w-6xl px-6 py-24">
-
-    <div class="rounded-3xl border border-cyan-400/20 bg-cyan-400/5 p-10 text-center lg:p-16">
+    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-8 lg:p-12">
 
       <p class="text-sm font-semibold uppercase tracking-widest text-cyan-400">
-        AI Assistant
+        Mi visión
       </p>
 
-      <h2 class="mt-4 text-4xl font-bold sm:text-5xl">
-        ¿Quieres saber más sobre mi perfil?
+      <h2 class="mt-4 text-3xl font-bold lg:text-4xl">
+        Seguir aprendiendo, crear y tener libertad
       </h2>
 
-      <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-        Pregunta directamente a mi CV sobre mi experiencia,
-        liderazgo, Ruby on Rails, proyectos, gestión o encaje
-        con una posición.
-      </p>
+      <div class="mt-6 max-w-4xl space-y-4 text-lg leading-8 text-slate-400">
 
-      <div class="mt-10">
-        <%= link_to "Pregúntale a mi CV →",
-                    chat_path,
-                    class: "inline-flex items-center rounded-xl bg-cyan-400 px-8 py-4 font-bold text-slate-950 transition hover:bg-cyan-300" %>
+        <p>
+          Profesionalmente quiero seguir creciendo en el mundo del software,
+          profundizar en inteligencia artificial y mantener viva la parte
+          técnica de mi carrera.
+        </p>
+
+        <p>
+          Personalmente, quiero conservar la libertad de trabajar en remoto y
+          poder elegir dónde vivir. Me imagino en una casa con jardín, cerca de
+          la naturaleza, con mi pareja, mi perro y, algún día, mi familia.
+        </p>
+
+        <p>
+          Quiero poder trabajar en tecnología, viajar, disfrutar del mar y de
+          la naturaleza, dedicar tiempo a las personas que quiero y seguir
+          aprendiendo cosas nuevas.
+        </p>
+
       </div>
 
     </div>
@@ -394,28 +768,60 @@
   </section>
 
 
+  <!-- AI CTA -->
+  <section class="mx-auto max-w-6xl px-6 py-24">
+
+    <div class="rounded-3xl border border-cyan-400 bg-cyan-400 p-10 text-center lg:p-16">
+
+      <p class="text-sm font-semibold uppercase tracking-widest text-slate-950">
+        Asistente con IA
+      </p>
+
+      <h2 class="mt-4 text-4xl font-bold text-slate-950 lg:text-5xl">
+        Hay mucho más que contar que una lista de puestos
+      </h2>
+
+      <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-800">
+        Pregúntale a mi CV con IA sobre mi experiencia profesional, trayectoria
+        técnica, liderazgo, proyectos, habilidades, formación, intereses o
+        aquello que quieras conocer sobre mi perfil.
+      </p>
+
+      <div class="mt-8">
+
+        <%= link_to "Habla con mi CV con IA →",
+                    chat_path,
+                    class: "inline-flex rounded-xl bg-slate-950 px-6 py-3 font-semibold text-white transition hover:bg-slate-800" %>
+
+      </div>
+
+    </div>
+  </section>
 
 
   <!-- FOOTER -->
   <footer class="border-t border-slate-800">
 
-    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-slate-500 md:flex-row md:justify-between">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 md:flex-row md:items-center md:justify-between">
 
-      <span>
-        <%= @profile.name %>
-      </span>
+      <div>
 
-      <span>
-        <%= @profile.location %>
-      </span>
+        <p class="font-semibold text-white">
+          <%= @profile.name %>
+        </p>
 
-      <span>
+        <p class="mt-1 text-sm text-slate-500">
+          <%= @profile.location %>
+        </p>
+
+      </div>
+
+      <p class="text-sm text-slate-500">
         <%= @profile.email %>
-      </span>
+      </p>
 
     </div>
 
   </footer>
 
 </div>
-
