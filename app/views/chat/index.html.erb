@@ -155,6 +155,7 @@
         color: #cbd5e1;
         font-size: 15px;
         line-height: 1.9;
+        white-space: pre-wrap;
     }
 
     /* USER MESSAGE */
@@ -452,6 +453,7 @@
     }
 </style>
 
+
 <div
     class="ai-cv-page"
     data-controller="chat"
@@ -463,7 +465,6 @@
   <header class="ai-header">
     <div class="ai-container ai-header-inner">
 
-
       <a href="/" class="ai-logo">
         AI Professional CV
       </a>
@@ -473,16 +474,15 @@
       </a>
 
     </div>
-
-
   </header>
+
 
   <!-- MAIN -->
 
   <main>
 
-
     <!-- HERO -->
+
     <section class="ai-container ai-hero">
 
       <div class="ai-hero-content">
@@ -504,9 +504,11 @@
 
 
       <!-- CHAT -->
+
       <div class="ai-chat">
 
         <!-- CONVERSATION -->
+
         <div class="ai-conversation">
 
           <div
@@ -514,7 +516,8 @@
               data-chat-target="messages"
           >
 
-            <!-- ASSISTANT -->
+            <!-- INITIAL ASSISTANT MESSAGE -->
+
             <div class="ai-message">
 
               <div class="ai-icon">
@@ -542,6 +545,7 @@
 
 
           <!-- QUESTIONS -->
+
           <div class="ai-suggestions">
 
             <p class="ai-section-label">
@@ -553,68 +557,64 @@
               <button
                   type="button"
                   class="ai-question"
-                  data-chat-target="suggestion"
                   data-action="click->chat#useSuggestion"
                   data-question="¿Cuál es su experiencia con Ruby on Rails?"
               >
-            <span class="ai-question-title">
-              ¿Cuál es su experiencia con Ruby on Rails?
-            </span>
+                <span class="ai-question-title">
+                  ¿Cuál es su experiencia con Ruby on Rails?
+                </span>
 
                 <span class="ai-question-description">
-              Experiencia técnica y trayectoria profesional
-            </span>
+                  Experiencia técnica y trayectoria profesional
+                </span>
               </button>
 
 
               <button
                   type="button"
                   class="ai-question"
-                  data-chat-target="suggestion"
                   data-action="click->chat#useSuggestion"
                   data-question="¿Qué experiencia tiene como Technical Lead?"
               >
-            <span class="ai-question-title">
-              ¿Qué experiencia tiene como Technical Lead?
-            </span>
+                <span class="ai-question-title">
+                  ¿Qué experiencia tiene como Technical Lead?
+                </span>
 
                 <span class="ai-question-description">
-              Liderazgo técnico y equipos
-            </span>
+                  Liderazgo técnico y equipos
+                </span>
               </button>
 
 
               <button
                   type="button"
                   class="ai-question"
-                  data-chat-target="suggestion"
                   data-action="click->chat#useSuggestion"
                   data-question="¿Qué experiencia tiene como PMO?"
               >
-            <span class="ai-question-title">
-              ¿Qué experiencia tiene como PMO?
-            </span>
+                <span class="ai-question-title">
+                  ¿Qué experiencia tiene como PMO?
+                </span>
 
                 <span class="ai-question-description">
-              Gestión, coordinación y proyectos
-            </span>
+                  Gestión, coordinación y proyectos
+                </span>
               </button>
 
 
               <button
                   type="button"
                   class="ai-question"
-                  data-chat-target="suggestion"
                   data-action="click->chat#useSuggestion"
                   data-question="¿Ha trabajado en el sector financiero?"
               >
-            <span class="ai-question-title">
-              ¿Ha trabajado en el sector financiero?
-            </span>
+                <span class="ai-question-title">
+                  ¿Ha trabajado en el sector financiero?
+                </span>
 
                 <span class="ai-question-description">
-              Sectores y experiencia empresarial
-            </span>
+                  Sectores y experiencia empresarial
+                </span>
               </button>
 
             </div>
@@ -625,11 +625,13 @@
 
 
         <!-- INPUT -->
+
         <div class="ai-input-area">
 
           <form
               class="ai-form"
               data-action="submit->chat#submit"
+              data-turbo="false"
           >
 
             <div class="ai-input-row">
@@ -637,6 +639,7 @@
               <input
                   type="text"
                   class="ai-input"
+                  name="question"
                   placeholder="Pregunta algo sobre mi perfil..."
                   autocomplete="off"
                   data-chat-target="input"
@@ -652,11 +655,6 @@
 
             </div>
 
-            <p class="ai-disclaimer">
-              Las respuestas estarán basadas en la información profesional
-              disponible en este CV.
-            </p>
-
           </form>
 
         </div>
@@ -665,6 +663,7 @@
 
 
       <!-- FOOTER -->
+
       <div class="ai-footer">
 
         <a href="/" class="ai-back">
@@ -674,7 +673,6 @@
       </div>
 
     </section>
-
 
   </main>
 

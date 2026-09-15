@@ -1,4 +1,6 @@
 class ChatController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :ask
+
   def index
     @profile = Profile.includes(
       :experiences,
@@ -19,7 +21,7 @@ class ChatController < ApplicationController
       return
     end
 
-    answer = AiCv::AnswerQuestion.call(question)
+    answer = Chat::AnswerQuestion.call(question)
 
     render json: {
       question: question,
@@ -28,7 +30,7 @@ class ChatController < ApplicationController
 
   rescue StandardError => e
     Rails.logger.error(
-      "AiCv::AnswerQuestion error: #{e.class}: #{e.message}"
+      "Chat::AnswerQuestion error: #{e.class}: #{e.message}"
     )
 
     render json: {
